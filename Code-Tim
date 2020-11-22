@@ -1,0 +1,126 @@
+# ______________________________________________________________________________
+"""
+Packages that have to be installed:
+- requests
+- json
+- Easytkinter
+- DateTime
+- Pytz
+- Geopy
+- FPDF
+"""
+# ______________________________________________________________________________
+# 1. Preparation
+
+# Import libraries
+# Requests needed to pull URL
+import requests
+# json needed to handle data from API
+import json
+# datetime needed to convert time in a python compatible format (not used right now because only looking at current weather not specifying time)
+from datetime import datetime
+# Also need pytz for timezone
+import pytz
+#we need tkinter to get the popup windows
+import tkinter as tk
+from tkinter import simpledialog
+#we need geopy to translate a location into coordinates
+from geopy.geocoders import Nominatim
+#to create a pdf:
+from fpdf import FPDF
+# ______________________________________________________________________________
+# 2. Setup API to fetch data
+
+#Set URL parameters (user input later), add on: allow user to input place name and use lat long converter
+api_key = "9c0ce6ab97bfa4ad656dafe8389e5c31"
+
+# ______________________________________________________________________________
+# 3. Define functions
+
+def func1(lat, lon):
+    url = "https://api.openweathermap.org/data/2.5/onecall?lat=%s&lon=%s&appid=%s&units=metric" % (lat, lon, api_key)
+    # %s in url used so we can use parameters in the bracket to assign values at this place
+    response = requests.get(url)
+    data = json.loads(response.text)
+    #print(json.dumps(data, indent=2))
+    # For now select only current weather from pulled data
+    current = data["current"]
+    return current
+
+
+# Ignore function 2 for now
+def func2():
+    # Layer name -> you need to use the code names from https://openweathermap.org/api/weather-map-2#layers
+    op = "TA2"
+    # Number of zoom level
+    z = "1"
+    # Number of x tile coordinate
+    x = "48"
+    # Number of y tile coordinate
+    y = "16"
+    #mapurl = f"http://maps.openweathermap.org/maps/2.0/weather/{op}/{z}/{x}/{y}&appid={api_key}"
+    mapurl = f"http://maps.openweathermap.org/maps/2.0/weather/TA2/1/48/16&appid=9c0ce6ab97bfa4ad656dafe8389e5c31"
+    response2 = requests.get(mapurl)
+    print(response2.status_code)
+    # i dont understand what the return format is, is it a text, picture or what?
+    # https://requests.readthedocs.io/en/master/
+    #data2 = json.loads(response2.text)
+    return response2
+
+
+# ______________________________________________________________________________
+# 4. Ask user what he wants to do and input location
+
+while True:
+    #here we create the first pop-up window which asks the user what he wants to do
+    options_window = tk.Tk()
+    options_window.withdraw()
+    # Todo: organize the content of prompt in a better way, f.ex. that we only have to put a variable there and this variable contains a list of options
+    # Todo: If user presses cancel button end the code
+    task = simpledialog.askstring(title="Hello User!", prompt="What do you want to do?\n get weather infos: 1\n something else: 2 \n quit: 3")
+
+    if task == '1':
+        # Ask user for input location
+        coord_window_place = tk.Tk()
+        coord_window_place.withdraw()
+        place = simpledialog.askstring(title="Desired Place", prompt="What is the loction that you want the weather from?")
+
+        geolocator = Nominatim(user_agent="Weather_APP")
+        location = geolocator.geocode(place)
+        lat = location.latitude
+        lon = location.longitude
+        # Todo: Ask user what he wants to know (temp, humidity, etc)
+        # Todo: give error if coordinates not specified/ too large and ask again
+        # Todo: reasearch a nice way to print the results more obvious. Maybe as an image or a
+        # Call respective function
+        current_weather = func1(lat, lon)
+        #Print output here for now, this will later move to 5 if output is larger (eg map / timeseries).
+        loc_temp = current_weather["temp"]
+        loc_pressure = current_weather["pressure"]
+        print(f"\n\nRESULT\n\n--------------------------\n The temperature (degrees celsius) in {place} is: {loc_temp}\n--------------------------")
+        print(f"The atmospheric pressure (hPa) in {place} is: {loc_pressure}\n--------------------------")
+        print("\n")
+        #the following code will put the results into a pdf. To achieve that, go to Top left corner Screen
+        # -> Pycharm-> Preferences -> Editor -> File and Code Templates and create a PDF called "Weather".
+        # After running this code the answer will be displayed in the PDF
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_font("Arial", size=12)
+        pdf.cell(200, 10, txt=f"The weather in {place} is: \n {loc_temp} degrees and the pressure is {loc_pressure}", ln=1, align="C")
+        pdf.output("Weather.pdf")
+        
+    if task == '2':
+        # Placeholder for another function
+        print("Work in progress")
+        map = func2()
+        print(map)
+    # Check for invalid input
+    if task != '1' and task != '2' and task != '3':
+        print("Please provide valid input")
+    if task == '3':
+        exit()
+
+# ______________________________________________________________________________
+# 5. Print All the results into a PDF document
+
+# Use FPDF, seems to be a bit annoying to specify all the details how to print the pdf but fairly easy
