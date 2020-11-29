@@ -17,7 +17,9 @@ url = "https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=%s&lon=%s
     lat, lon, dt, api_key)  # %s in url used so we can use parameters in the bracket to assign values at this place
 response = requests.get(url)
 data = json.loads(response.text)
-print(data)
+print(json.dumps(data, indent = 2))
+x = data["current"]["temp"]
+print(x)
 
 # Data of interest
 # Note: OpenWeatherMaps's API allows us to go back 5 days. Therefore, depending on what we want, we could show the
