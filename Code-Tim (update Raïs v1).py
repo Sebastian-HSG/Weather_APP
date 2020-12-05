@@ -55,7 +55,7 @@ def func1(lat, lon):
     # current_weather_id = data["weather"]["id"]
     # current_weather_main = data["weather"]["main"]
     current_weather_description = data["current"]["weather"][0]["description"]
-    # current_weather_icon = data["current"]["weather"][0]["icon"]
+    current_weather_icon = data["current"]["weather"][0]["icon"]
     # print(current_rain, current_wind_speed, current_wind_direction)
     # print(current_weather_id, current_weather_main, current_weather_description, current_weather_icon)
     # print(json.dumps(data, indent=2))
@@ -73,7 +73,7 @@ def func1(lat, lon):
     else:
         rain_or_snow_volume = None
         rain_or_snow_volume_define = None
-    return current_temp, feels_like_temp, pressure, current_wind_speed, current_wind_direction, current_weather_description, rain_or_snow_volume, rain_or_snow_volume_define
+    return current_temp, feels_like_temp, pressure, current_wind_speed, current_wind_direction, current_weather_description, current_weather_icon, rain_or_snow_volume, rain_or_snow_volume_define
 
 # Return Proper variables
 #    if rain_or_snow_volume_define == "rain":
@@ -146,7 +146,13 @@ while True:
         # Todo: give error if coordinates not specified/ too large and ask again
         # Todo: reasearch a nice way to print the results more obvious. Maybe as an image or a
         # Call respective function and save the outcome under the variables
-        current_temp, feels_like_temp, pressure, current_wind_speed, current_wind_direction, current_weather_description, rain_or_snow_volume, rain_or_snow_volume_define = func1(lat, lon)
+        current_temp, feels_like_temp, pressure, current_wind_speed, current_wind_direction, current_weather_description, current_weather_icon, rain_or_snow_volume, rain_or_snow_volume_define = func1(lat, lon)
+
+        # Save Weather Icon Corresponding to Current Weather
+        from PIL import Image
+        from urllib.request import urlopen
+        current_weather_icon_image = Image.open(urlopen(f"http://openweathermap.org/img/wn/{current_weather_icon}@2x.png"))
+        current_weather_icon_image.save('current_weather_icon_image.png', 'png')
 
         # Wind Direction Conversion From Degrees To Text
         converted_current_wind_direction = current_wind_direction
@@ -212,7 +218,7 @@ while True:
                                                     f"Atmospheric Pressure: {pressure}hPa")
         else:
             answer = tk.messagebox.showinfo(title=f"Weather Information {place}",
-                                        message=f"{place} \n"
+                                            message=f"{place} \n"
                                                 f"Temperature: {current_temp}°C\n"
                                                 f"Feels Like Temperature: {feels_like_temp}°C.\n"
                                                 f"Weather Condition: {current_weather_description}.\n"
