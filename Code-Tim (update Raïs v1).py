@@ -55,7 +55,7 @@ def func1(lat, lon):
     # current_weather_id = data["weather"]["id"]
     # current_weather_main = data["weather"]["main"]
     current_weather_description = data["current"]["weather"][0]["description"]
-    # current_weather_icon = data["weather"]["icon"]
+    # current_weather_icon = data["current"]["weather"][0]["icon"]
     # print(current_rain, current_wind_speed, current_wind_direction)
     # print(current_weather_id, current_weather_main, current_weather_description, current_weather_icon)
     # print(json.dumps(data, indent=2))
@@ -75,8 +75,7 @@ def func1(lat, lon):
         rain_or_snow_volume_define = None
     return current_temp, feels_like_temp, pressure, current_wind_speed, current_wind_direction, current_weather_description, rain_or_snow_volume, rain_or_snow_volume_define
 
-
-    #Return Proper variables
+# Return Proper variables
 #    if rain_or_snow_volume_define == "rain":
 #        return current_temp, feels_like_temp, pressure, current_wind_speed, current_wind_direction, current_weather_description, rain_or_snow_volume
 #    elif rain_or_snow_volume_define == "snow":
@@ -131,7 +130,7 @@ while True:
     options_window.withdraw()
     # Todo: organize the content of prompt in a better way, f.ex. that we only have to put a variable there and this variable contains a list of options
     # Todo: If user presses cancel button end the code
-    task = simpledialog.askstring(title="Hello User!", prompt="What do you want to do?\n get weather infos: 1\n something else: 2 \n historical weather data: 3 \nquit: 4")
+    task = simpledialog.askstring(title="Hello User!", prompt="What do you want to do?\n\nGet current weather information: 1\nSomething else: 2 \nGet historical weather data: 3 \nQuit: 4")
 
     if task == '1':
         # Ask user for input location
@@ -149,10 +148,7 @@ while True:
         # Call respective function and save the outcome under the variables
         current_temp, feels_like_temp, pressure, current_wind_speed, current_wind_direction, current_weather_description, rain_or_snow_volume, rain_or_snow_volume_define = func1(lat, lon)
 
-        # Weather Image
-        # current_weather_icon_image = "http://openweathermap.org/img/wn/%s@2x.png" % current_weather_icon
-
-        # Wind Direction Conversion
+        # Wind Direction Conversion From Degrees To Text
         converted_current_wind_direction = current_wind_direction
         if 338 <= converted_current_wind_direction <= 360:
             converted_current_wind_direction = "N"
@@ -173,12 +169,12 @@ while True:
         elif 293 <= converted_current_wind_direction <= 337:
             converted_current_wind_direction = "NW"
 
-        # Wind Direction Arrow Corresponding to the Converted Current Wind Direction
+        # Wind Direction Conversion From Degrees To An Arrow
         converted_current_wind_direction_arrow = current_wind_direction
         if 338 <= converted_current_wind_direction_arrow <= 360:
             converted_current_wind_direction_arrow = "\u2191"
         elif 0 <= converted_current_wind_direction_arrow <= 22:
-            converted_current_wind_direction_arrow = "N"
+            converted_current_wind_direction_arrow = "\u2191"
         elif 23 <= converted_current_wind_direction_arrow <= 67:
             converted_current_wind_direction_arrow = "\u2197"
         elif 68 <= converted_current_wind_direction_arrow <= 112:
@@ -196,21 +192,13 @@ while True:
 
         #print the output in a popup: (see documentation: https://docs.python.org/3.9/library/tkinter.messagebox.html)
         # assert isinstance(current_weather_description, object)
-        # answer = tk.messagebox.showinfo(title=f"Weather Information {place}",
-        #                                message=f"{place} \n"
-        #                                        f"Temperature: {current_temp}°C\n"
-        #                                        f"Feels Like Temperature: {feels_like_temp}°C.\n"
-        #                                        f"Weather Description: {current_weather_description}.\n"
-        #                                        f"Wind: {current_wind_speed}m/s {converted_current_wind_direction}({converted_current_wind_direction_arrow})\n"
-        #                                        f"Atmospheric Pressure: {pressure}hPa")
-
         if rain_or_snow_volume_define == "rain":
             answer = tk.messagebox.showinfo(title=f"Weather Information {place}",
                                             message=f"{place} \n"
                                                     f"Temperature: {current_temp}°C\n"
                                                     f"Feels Like Temperature: {feels_like_temp}°C.\n"
+                                                    f"Weather Condition: {current_weather_description}.\n"
                                                     f"{rain_or_snow_volume}\n"
-                                                    f"Weather Description: {current_weather_description}.\n"
                                                     f"Wind: {current_wind_speed}m/s {converted_current_wind_direction}({converted_current_wind_direction_arrow})\n"
                                                     f"Atmospheric Pressure: {pressure}hPa")
         elif rain_or_snow_volume_define == "snow":
@@ -218,8 +206,8 @@ while True:
                                             message=f"{place} \n"
                                                     f"Temperature: {current_temp}°C\n"
                                                     f"Feels Like Temperature: {feels_like_temp}°C.\n"
+                                                    f"Weather Condition: {current_weather_description}.\n"
                                                     f"{rain_or_snow_volume}\n"
-                                                    f"Weather Description: {current_weather_description}.\n"
                                                     f"Wind: {current_wind_speed}m/s {converted_current_wind_direction}({converted_current_wind_direction_arrow})\n"
                                                     f"Atmospheric Pressure: {pressure}hPa")
         else:
@@ -227,7 +215,7 @@ while True:
                                         message=f"{place} \n"
                                                 f"Temperature: {current_temp}°C\n"
                                                 f"Feels Like Temperature: {feels_like_temp}°C.\n"
-                                                f"Weather Description: {current_weather_description}.\n"
+                                                f"Weather Condition: {current_weather_description}.\n"
                                                 f"Wind: {current_wind_speed}m/s {converted_current_wind_direction}({converted_current_wind_direction_arrow})\n"
                                                 f"Atmospheric Pressure: {pressure}hPa")
 
