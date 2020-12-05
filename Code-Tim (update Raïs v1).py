@@ -39,6 +39,7 @@ api_key = "9c0ce6ab97bfa4ad656dafe8389e5c31"
 # ______________________________________________________________________________
 # 3. Define functions
 
+# Function 1: Current Weather Information
 def func1(lat, lon):
     url = "https://api.openweathermap.org/data/2.5/onecall?lat=%s&lon=%s&appid=%s&units=metric" % (lat, lon, api_key)
     # %s in url used so we can use parameters in the bracket to assign values at this place
@@ -108,13 +109,13 @@ def func2():
     plt.show()
     return response2
 
-#historical data:
+# Function 3: Historical Data
 def func3(lat,lon):
     dt = "1606996800" #reset this so that it is in 5 day frame: https://www.unixtimestamp.com/index.php
     url = f"https://api.openweathermap.org/data/2.5/onecall/timemachine?lat={lat}&lon={lon}&dt={dt}&appid={api_key}"
     response = requests.get(url)
     data = json.loads(response.text)
-    print(json.dumps(data, indent=2))
+    # print(json.dumps(data, indent=2))
     tempkelvin = data["current"]["temp"]
     temp = round(tempkelvin - 273.15, 2)
     pressure = data["current"]["pressure"]
@@ -136,7 +137,7 @@ while True:
         # Ask user for input location
         coord_window_place = tk.Tk()
         coord_window_place.withdraw()
-        place = simpledialog.askstring(title="Desired Place", prompt="What is the location that you want the weather from?")
+        place = simpledialog.askstring(title="Desired Place", prompt="What is the location that you want the current weather from?")
 
         geolocator = Nominatim(user_agent="Weather_APP")
         location = geolocator.geocode(place)
@@ -196,8 +197,10 @@ while True:
         elif 293 <= converted_current_wind_direction_arrow <= 337:
             converted_current_wind_direction_arrow = "\u2196"
 
-        #print the output in a popup: (see documentation: https://docs.python.org/3.9/library/tkinter.messagebox.html)
+        # Print the output in a pop-up:
+        # (see documentation: https://docs.python.org/3.9/library/tkinter.messagebox.html)
         # assert isinstance(current_weather_description, object)
+        # Based on whether there is: 1) snow OR rain 2) no snow AND no RAIN the output is printed
         if rain_or_snow_volume_define == "rain":
             answer = tk.messagebox.showinfo(title=f"Weather Information {place}",
                                             message=f"{place} \n"
@@ -252,13 +255,17 @@ while True:
         # Ask user for input location
         coord_window_place = tk.Tk()
         coord_window_place.withdraw()
-        place = simpledialog.askstring(title="Desired Place", prompt="What is the loction that you want the weather from?")
+        place = simpledialog.askstring(title="Desired Place", prompt="What is the location that you want the historical weather from?")
 
         geolocator = Nominatim(user_agent="Weather_APP")
         location = geolocator.geocode(place)
         lat = location.latitude
         lon = location.longitude
+
+        # Call respective function and save the outcome under the variables
         temp, pressure = func3(lat, lon)
+
+        # Print the output in a pop-up:
         answer = tk.messagebox.showinfo(title=f"The weather in {place} was:",
                                         message=f'temperature: {temp} (degrees celsius)\natmospheric pressure: {pressure} (hPa) ')
     if task == '4':
