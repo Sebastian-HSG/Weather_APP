@@ -1,43 +1,41 @@
-# ______________________________________________________________________________
-"""
-Packages that have to be installed:
-- requests
-- json
-- Easytkinter
-- DateTime
-- Geopy
-- matplotlib
-"""
-# ______________________________________________________________________________
+# NOTES FOR TEAM #
+# I HAVE ADDED THE FOLLOWING TEXT THROUGHOUT OUR CODE AT LINES OF COULD THAT SHOULD BE DELETE BEFORE SUBMISSION:
+# "### THIS NEEDS TO BE REMOVED ###"
+
+# ______________________________________________________________________________________________________________________
+
+# 0. Prerequisites
+
+# The following packages are required and need to be installed before continuing:
+# - Requests (https://requests.readthedocs.io/)
+# - geopy (https://github.com/geopy/geopy)
+# - Matplotlib (https://matplotlib.org/)
+# - json (built-in in Python)
+# - Tkinter (built-in in Python)
+
+# The following API key is needed:
+# - OpenWeather (for the current version of this program, the free plan suffices; https://openweathermap.org/api)
+
+# ______________________________________________________________________________________________________________________
 # 1. Preparation
 
 # Import libraries
-# Requests needed to pull URL
-import requests
-# json needed to handle data from API
-import json
-# datetime needed to convert time in a python compatible format (not used right now because only looking at current weather not specifying time)
-from datetime import datetime
-# we need tkinter to get the popup windows
-import tkinter as tk
+import requests  # Requests is needed for http(s) requests
+import json  # json is needed to handle the received data from API
+import tkinter as tk  # Tkinter is needed to for the GUI
 from tkinter import simpledialog
-# we need geopy to translate a location into coordinates
-from geopy.geocoders import Nominatim
-# to create a pdf:
-from fpdf import FPDF
-# to create the map we use matplotlib:
-import matplotlib.pyplot as plt
+from geopy.geocoders import Nominatim  # geopy is needed to convert a location (string) into coordinates
+import matplotlib.pyplot as plt  # Matplotlib is needed to create a weather map
 import matplotlib.image as mpimg
 
-# ______________________________________________________________________________
+# ______________________________________________________________________________________________________________________
 # 2. Setup API to fetch data
 
-# Set URL parameters (user input later), add on: allow user to input place name and use lat long converter
-api_key = "d5f46060a3cb79f7df21271fed87a85a"
+api_key = "d5f46060a3cb79f7df21271fed87a85a"  # Insert your OpenWeather API key here
 
-
-# ______________________________________________________________________________
+# ______________________________________________________________________________________________________________________
 # 3. Define functions
+
 
 # Function 1: Get Current Weather Information
 def func1(lat, lon):
@@ -92,21 +90,22 @@ def func2():
     # mapurl = "https://tile.openweathermap.org/map/precipitation_new/1/1/0.png?appid=9c0ce6ab97bfa4ad656dafe8389e5c31"
     response2 = requests.get(mapurl)
     print(response2.status_code)
-    # the next 3 lines form the color window. We first need to unpacj the png data into an array and then plot the array and lastly show the plot
+    # the next 3 lines form the color window. We first need to unpack the png data into an array and then plot the array and lastly show the plot
     img = mpimg.imread(f'{mapurl}')
     # print(img)
     imgplot = plt.imshow(img)
     plt.show()
     return response2
 
+
 def func3(lat, lon):
     url = "https://api.openweathermap.org/data/2.5/onecall?lat=%s&lon=%s&appid=%s&units=metric" % (lat, lon, api_key)
-    # %s in url used so we can use parameters in the bracket to assign values at this place
+    # %s are used in the url to allow us to use parameters in the brackets to assign values at these places in the url
     response3 = requests.get(url)
     data = json.loads(response3.text)
-    # print(json.dumps(data, indent=2))
+    # print(json.dumps(data, indent=2))  ### THIS NEEDS TO BE REMOVED ###
 
-    # Show selected weather data from pulled data
+    # Show selection of weather data from all pulled data
     # General weather data (for all requested locations):
     hourly_temp = data["hourly"][1]["temp"]
     hourly_feels_like_temp = data["hourly"][1]["feels_like"]
@@ -117,8 +116,8 @@ def func3(lat, lon):
 
     # Conditional weather data (depending on the hourly primary weather conditions for the requested locations)
     hourly_rain_or_snow_volume = data["hourly"][1]["weather"][0]["main"]
-    if hourly_rain_or_snow_volume == "Snow":  # If the current primary weather condition for the requested location is snow,
-        # get the snow volume
+    if hourly_rain_or_snow_volume == "Snow":  # If the current primary weather condition for the requested location
+        # is snow, get the snow volume
         hourly_rain_or_snow_volume = data["hourly"][1]["snow"]["1h"]
         hourly_rain_or_snow_volume = f"\u2744 {hourly_rain_or_snow_volume} mm/h"
         hourly_rain_or_snow_volume_define = "snow"
@@ -133,34 +132,35 @@ def func3(lat, lon):
     return hourly_temp, hourly_feels_like_temp, hourly_pressure, hourly_wind_speed, hourly_wind_direction, \
            hourly_weather_description, hourly_rain_or_snow_volume, hourly_rain_or_snow_volume_define
 
-# ______________________________________________________________________________
+
+# ______________________________________________________________________________________________________________________
 # 4. Ask the user what they want to do
 
 while True:
     # Create the first pop-up window that asks the user what they want to do
     options_window = tk.Tk()
     options_window.withdraw()
-    # Todo: organize the content of prompt in a better way, f.ex. that we only have to put a variable there and this variable contains a list of options
-    # Todo: If user presses cancel button end the code
+    # Todo: organize the content of prompt in a better way, f.ex. that we only have to put a variable there and this variable contains a list of options ### THIS NEEDS TO BE REMOVED ###
+    # Todo: If user presses cancel button end the code ### THIS NEEDS TO BE REMOVED ###
     task = simpledialog.askstring(title="Weather Information", prompt="What do you want to do?\n\nGet Current Weather "
-                                                                      "Information: 1\nShow Weather Map: 2\nHourly: 3"
+                                                                      "Information: 1\nShow Weather Map: 2\n"
+                                                                      "Get Weather Forecast (Next Hour): 3"
                                                                       "\nQuit Program: 4")
 
     if task == '1':
-        # Ask user for input location
+        # Ask the user for input (location of interest)
         coord_window_place = tk.Tk()
         coord_window_place.withdraw()
         place = simpledialog.askstring(title="Get Current Weather Information",
-                                       prompt="What is the location that you want the current "
-                                              "weather from?\n\nPlease enter the location as "
-                                              "follows: City, Country")
+                                       prompt="For which location do you want the current weather?",
+                                       initialvalue="City, Country")
 
         geolocator = Nominatim(user_agent="Weather_APP")
         location = geolocator.geocode(place)
         lat = location.latitude
         lon = location.longitude
-        # Todo: give error if coordinates not specified/ too large and ask again
-        # Todo: reasearch a nice way to print the results more obvious. Maybe as an image or a
+        # Todo: give error if coordinates not specified/ too large and ask again  ### THIS NEEDS TO BE REMOVED ###
+        # Todo: research a nice way to print the results more obvious. Maybe as an image or a  ### THIS NEEDS TO BE REMOVED ###
         # Call respective function and save the outcome under the variables
         current_temp, current_feels_like_temp, current_pressure, current_wind_speed, current_wind_direction, current_weather_description, rain_or_snow_volume, rain_or_snow_volume_define = func1(
             lat, lon)
@@ -208,13 +208,13 @@ while True:
             converted_current_wind_direction_arrow = "\u2196"
 
         # Print the output in a new pop-up window:
-        # (see documentation: https://docs.python.org/3.9/library/tkinter.messagebox.html)
-        # assert isinstance(current_weather_description, object)
+        # (see documentation: https://docs.python.org/3.9/library/tkinter.messagebox.html)  ### THIS NEEDS TO BE REMOVED ###
+        # assert isinstance(current_weather_description, object)  ### THIS NEEDS TO BE REMOVED ###
 
-        # The relevant output is print based on the primary weather condition for the user's requested location:
+        # The relevant output is printed based on the primary weather condition for the user's requested location:
         # If the current primary weather condition is rain
         if rain_or_snow_volume_define == "rain":
-            answer = tk.messagebox.showinfo(title=f"Weather Information {place}",
+            answer = tk.messagebox.showinfo(title=f"Current Weather Information {place}",
                                             message=f"{place} \n"
                                                     f"Temperature: {current_temp}°C\n"
                                                     f"Feels Like Temperature: {current_feels_like_temp}°C.\n"
@@ -225,7 +225,7 @@ while True:
 
         # If the current primary weather condition is snow
         elif rain_or_snow_volume_define == "snow":
-            answer = tk.messagebox.showinfo(title=f"Weather Information {place}",
+            answer = tk.messagebox.showinfo(title=f"Current Weather Information {place}",
                                             message=f"{place} \n"
                                                     f"Temperature: {current_temp}°C\n"
                                                     f"Feels Like Temperature: {current_feels_like_temp}°C.\n"
@@ -236,7 +236,7 @@ while True:
 
         # If the current primary weather condition is something else than rain or snow
         else:
-            answer = tk.messagebox.showinfo(title=f"Weather Information {place}",
+            answer = tk.messagebox.showinfo(title=f"Current Weather Information {place}",
                                             message=f"{place} \n"
                                                     f"Temperature: {current_temp}°C\n"
                                                     f"Feels Like Temperature: {current_feels_like_temp}°C.\n"
@@ -251,21 +251,22 @@ while True:
         print(map)
 
     if task == '3':
+        # Ask the user for input (location of interest)
         coord_window_place = tk.Tk()
         coord_window_place.withdraw()
-        place = simpledialog.askstring(title="Get Current Weather Information",
-                                       prompt="What is the location that you want the hourly "
-                                              "weather from?\n\nPlease enter the location as "
-                                              "follows: City, Country")
+        place = simpledialog.askstring(title="Get Weather Forecast (Next Hour)",
+                                       prompt="For which location do you want the weather forecast (next hour)?",
+                                       initialvalue="City, Country")
 
         geolocator = Nominatim(user_agent="Weather_APP")
         location = geolocator.geocode(place)
         lat = location.latitude
         lon = location.longitude
-        # Todo: give error if coordinates not specified/ too large and ask again
-        # Todo: reasearch a nice way to print the results more obvious. Maybe as an image or a
+        # Todo: give error if coordinates not specified/ too large and ask again  ### THIS NEEDS TO BE REMOVED ###
+        # Todo: research a nice way to print the results more obvious. Maybe as an image or a  ### THIS NEEDS TO BE REMOVED ###
         # Call respective function and save the outcome under the variables
-        hourly_temp, hourly_feels_like_temp, hourly_pressure, hourly_wind_speed, hourly_wind_direction, hourly_weather_description, hourly_rain_or_snow_volume, hourly_rain_or_snow_volume_define = func3(lat, lon)
+        hourly_temp, hourly_feels_like_temp, hourly_pressure, hourly_wind_speed, hourly_wind_direction, hourly_weather_description, hourly_rain_or_snow_volume, hourly_rain_or_snow_volume_define = func3(
+            lat, lon)
 
         # Convert the wind direction from degrees to the corresponding abbreviation
         converted_hourly_wind_direction = hourly_wind_direction
@@ -310,45 +311,45 @@ while True:
             converted_hourly_wind_direction_arrow = "\u2196"
 
         # Print the output in a new pop-up window:
-        # (see documentation: https://docs.python.org/3.9/library/tkinter.messagebox.html)
-        # assert isinstance(current_weather_description, object)
+        # (see documentation: https://docs.python.org/3.9/library/tkinter.messagebox.html)  ### THIS NEEDS TO BE REMOVED ###
+        # assert isinstance(current_weather_description, object)  ### THIS NEEDS TO BE REMOVED ###
 
-        # The relevant output is print based on the primary weather condition for the user's requested location:
+        # The relevant output is printed based on the primary weather condition for the user's requested location:
         # If the current primary weather condition is rain
         if hourly_rain_or_snow_volume_define == "rain":
-            answer = tk.messagebox.showinfo(title=f"Hourly Forecast {place}",
-                                            message=f"{place} \n"
-                                                    f"Hourly Temperature: {hourly_temp}°C\n"
-                                                    f"Hourly Feels Like Temperature: {hourly_feels_like_temp}°C.\n"
-                                                    f"Hourly Weather Condition: {hourly_weather_description}.\n"
+            answer = tk.messagebox.showinfo(title=f"Weather Forecast (Next Hour) {place}",
+                                            message=f"Weather Forecast (Next Hour){place} \n"
+                                                    f"Temperature: {hourly_temp}°C\n"
+                                                    f"Feels Like Temperature: {hourly_feels_like_temp}°C.\n"
+                                                    f"Weather Condition: {hourly_weather_description}.\n"
                                                     f"{hourly_rain_or_snow_volume}\n"
-                                                    f"Hourly Wind: {hourly_wind_speed}m/s {converted_hourly_wind_direction}({converted_hourly_wind_direction_arrow})\n "
-                                                    f"Hourly Atmospheric Pressure: {hourly_pressure}hPa")
+                                                    f"Wind: {hourly_wind_speed}m/s {converted_hourly_wind_direction}({converted_hourly_wind_direction_arrow})\n "
+                                                    f"Atmospheric Pressure: {hourly_pressure}hPa")
 
         # If the current primary weather condition is snow
         elif hourly_rain_or_snow_volume_define == "snow":
-            answer = tk.messagebox.showinfo(title=f"Hourly Forecast {place}",
-                                            message=f"{place} \n"
-                                                    f"Hourly Temperature: {hourly_temp}°C\n"
-                                                    f"Hourly Feels Like Temperature: {hourly_feels_like_temp}°C.\n"
-                                                    f"Hourly Weather Condition: {hourly_weather_description}.\n"
+            answer = tk.messagebox.showinfo(title=f"Weather Forecast (Next Hour) {place}",
+                                            message=f"Weather Forecast (Next Hour){place} \n"
+                                                    f"Temperature: {hourly_temp}°C\n"
+                                                    f"Feels Like Temperature: {hourly_feels_like_temp}°C.\n"
+                                                    f"Weather Condition: {hourly_weather_description}.\n"
                                                     f"{hourly_rain_or_snow_volume}\n"
-                                                    f"Hourly Wind: {hourly_wind_speed}m/s {converted_hourly_wind_direction}({converted_hourly_wind_direction_arrow})\n"
-                                                    f"Hourly Atmospheric Pressure: {hourly_pressure}hPa")
+                                                    f"Wind: {hourly_wind_speed}m/s {converted_hourly_wind_direction}({converted_hourly_wind_direction_arrow})\n "
+                                                    f"Atmospheric Pressure: {hourly_pressure}hPa")
 
         # If the current primary weather condition is something else than rain or snow
         else:
-            answer = tk.messagebox.showinfo(title=f"Hourly Forecast {place}",
-                                            message=f"{place} \n"
-                                                    f"Hourly Temperature: {hourly_temp}°C\n"
-                                                    f"Hourly Feels Like Temperature: {hourly_feels_like_temp}°C.\n"
-                                                    f"Hourly Weather Condition: {hourly_weather_description}.\n"
-                                                    f"Hourly Wind: {hourly_wind_speed}m/s {converted_hourly_wind_direction}({converted_hourly_wind_direction_arrow})\n"
-                                                    f"Hourly Atmospheric Pressure: {hourly_pressure}hPa")
+            answer = tk.messagebox.showinfo(title=f"Weather Forecast (Next Hour) {place}",
+                                            message=f"Weather Forecast (Next Hour) {place} \n"
+                                                    f"Temperature: {hourly_temp}°C\n"
+                                                    f"Feels Like Temperature: {hourly_feels_like_temp}°C.\n"
+                                                    f"Weather Condition: {hourly_weather_description}.\n"
+                                                    f"Wind: {hourly_wind_speed}m/s {converted_hourly_wind_direction}({converted_hourly_wind_direction_arrow})\n"
+                                                    f"Atmospheric Pressure: {hourly_pressure}hPa")
 
     if task == '4':
         exit()
 
     # Check for invalid input
     if task != '1' and task != '2' and task != '3' and task != '4':
-        answer = tk.messagebox.showerror(title=f"Error", message="Please choose a valid option")
+        answer = tk.messagebox.showerror(title=f"Error", message="Please choose a valid option.")
