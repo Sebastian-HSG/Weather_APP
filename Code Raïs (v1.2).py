@@ -50,8 +50,8 @@ def func1(lat, lon):
     # Show selected weather data from pulled data
     # General weather data (for all requested locations):
     current_temp = data["current"]["temp"]
-    feels_like_temp = data["current"]["feels_like"]
-    pressure = data["current"]["pressure"]
+    current_feels_like_temp = data["current"]["feels_like"]
+    current_pressure = data["current"]["pressure"]
     current_wind_speed = data["current"]["wind_speed"]
     current_wind_direction = data["current"]["wind_deg"]
     current_weather_description = data["current"]["weather"][0]["description"]
@@ -71,7 +71,7 @@ def func1(lat, lon):
     else:  # if the current primary weather condition is something other than rain or snow.
         rain_or_snow_volume = None
         rain_or_snow_volume_define = None
-    return current_temp, feels_like_temp, pressure, current_wind_speed, current_wind_direction, current_weather_description, rain_or_snow_volume, rain_or_snow_volume_define
+    return current_temp, current_feels_like_temp, current_pressure, current_wind_speed, current_wind_direction, current_weather_description, rain_or_snow_volume, rain_or_snow_volume_define
 
 
 # Function 2: Show Weather Map
@@ -104,7 +104,7 @@ def func3(lat, lon):
     # %s in url used so we can use parameters in the bracket to assign values at this place
     response3 = requests.get(url)
     data = json.loads(response3.text)
-    print(json.dumps(data, indent=2))
+    # print(json.dumps(data, indent=2))
 
     # Show selected weather data from pulled data
     # General weather data (for all requested locations):
@@ -162,7 +162,7 @@ while True:
         # Todo: give error if coordinates not specified/ too large and ask again
         # Todo: reasearch a nice way to print the results more obvious. Maybe as an image or a
         # Call respective function and save the outcome under the variables
-        current_temp, feels_like_temp, pressure, current_wind_speed, current_wind_direction, current_weather_description, rain_or_snow_volume, rain_or_snow_volume_define = func1(
+        current_temp, current_feels_like_temp, current_pressure, current_wind_speed, current_wind_direction, current_weather_description, rain_or_snow_volume, rain_or_snow_volume_define = func1(
             lat, lon)
 
         # Convert the wind direction from degrees to the corresponding abbreviation
@@ -217,32 +217,32 @@ while True:
             answer = tk.messagebox.showinfo(title=f"Weather Information {place}",
                                             message=f"{place} \n"
                                                     f"Temperature: {current_temp}°C\n"
-                                                    f"Feels Like Temperature: {feels_like_temp}°C.\n"
+                                                    f"Feels Like Temperature: {current_feels_like_temp}°C.\n"
                                                     f"Weather Condition: {current_weather_description}.\n"
                                                     f"{rain_or_snow_volume}\n"
                                                     f"Wind: {current_wind_speed}m/s {converted_current_wind_direction}({converted_current_wind_direction_arrow})\n"
-                                                    f"Atmospheric Pressure: {pressure}hPa")
+                                                    f"Atmospheric Pressure: {current_pressure}hPa")
 
         # If the current primary weather condition is snow
         elif rain_or_snow_volume_define == "snow":
             answer = tk.messagebox.showinfo(title=f"Weather Information {place}",
                                             message=f"{place} \n"
                                                     f"Temperature: {current_temp}°C\n"
-                                                    f"Feels Like Temperature: {feels_like_temp}°C.\n"
+                                                    f"Feels Like Temperature: {current_feels_like_temp}°C.\n"
                                                     f"Weather Condition: {current_weather_description}.\n"
                                                     f"{rain_or_snow_volume}\n"
                                                     f"Wind: {current_wind_speed}m/s {converted_current_wind_direction}({converted_current_wind_direction_arrow})\n"
-                                                    f"Atmospheric Pressure: {pressure}hPa")
+                                                    f"Atmospheric Pressure: {current_pressure}hPa")
 
         # If the current primary weather condition is something else than rain or snow
         else:
             answer = tk.messagebox.showinfo(title=f"Weather Information {place}",
                                             message=f"{place} \n"
                                                     f"Temperature: {current_temp}°C\n"
-                                                    f"Feels Like Temperature: {feels_like_temp}°C.\n"
+                                                    f"Feels Like Temperature: {current_feels_like_temp}°C.\n"
                                                     f"Weather Condition: {current_weather_description}.\n"
                                                     f"Wind: {current_wind_speed}m/s {converted_current_wind_direction}({converted_current_wind_direction_arrow})\n"
-                                                    f"Atmospheric Pressure: {pressure}hPa")
+                                                    f"Atmospheric Pressure: {current_pressure}hPa")
 
     if task == '2':
         # Placeholder for another function
