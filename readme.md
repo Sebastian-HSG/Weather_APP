@@ -11,14 +11,14 @@ The goal of this project was to create a program in Python that displays weather
 ## Pre-requisites
 This program was developed for Python 3.9.  <!-- Do we want to add something along the lines of: it may work previous Python versions, but this has not (yet) been  tested? -->
 In order to run this program, the following packages need to be installed:  #is packages the correct word or should this be libraries?
-- requests (https://requests.readthedocs.io/)
-- jason (https://github.com/runekaagaard/jason)
-- EasyTkinter (https://pythonhosted.org/EasyTkinter/)
-- DateTime (https://github.com/zopefoundation/DateTime)
-- pytz (http://pythonhosted.org/pytz)
+- Requests (https://requests.readthedocs.io/)
 - geopy (https://github.com/geopy/geopy)
-- fpdf (https://github.com/reingart/pyfpdf)
-- matplotlib (https://matplotlib.org/)
+- Matplotlib (https://matplotlib.org/)
+- json (built-in in Python)
+- Tkinter (built-in in Python)
+
+The following API key is needed:
+- OpenWeather (for the current version of this program, the free plan suffices; https://openweathermap.org/api)
 
 # Instructions
 1. Start <weatherinformation_vX.X.py> <!-- Placeholder for the final file name -->
