@@ -1,3 +1,5 @@
+<--! Markdown Layout Instructions: https://commonmark.org/help/ -->
+
 # Group Project (Group ID 2248) - Weather Information with Python
 Project language: Python
 
