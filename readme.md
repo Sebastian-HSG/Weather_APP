@@ -17,7 +17,6 @@ In order to run this program, the following packages need to be installed:  #is 
 - geopy (https://github.com/geopy/geopy)
 - fpdf (https://github.com/reingart/pyfpdf)
 - matplotlib (https://matplotlib.org/)
-<!-- Should we have links here? -->
 
 # Instructions
 1. Start <weatherinformation_vX.X.py> <!-- Placeholder for the final file name -->
