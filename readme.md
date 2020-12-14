@@ -1,6 +1,6 @@
-# Weather Information with Python
-Project language: Python
-Group Project: Group ID 2248
+## Weather Information with Python
+- Project language: Python
+- Group Project: Group ID 2248
 
 ## About
 - This is a group project of three students for the course "Skills: Programming - Introduction Level" (course number 3,793,1.00) and the course "Skills: Programming with Advanced Computer Languages" (course number 7,789,1.00) at the University of St.Gallen (HSG).
@@ -21,7 +21,7 @@ Group Project: Group ID 2248
 - OpenWeather (https://openweathermap.org/api)
 - For the current version of this program, the free plan suffices.
 
-# Instructions
+## Instructions
 1. Start weatherinformation_vX.X.py
 2. Add your own OpenWeather API key.
 3. Run the program.
@@ -31,15 +31,15 @@ The current version of the program, weatherinformation_v1.0, offers the followin
 1. Get the current weather information for any city in the world.
 2. Get the weather forecast (next hour) for any city in the world.
 
+## Contributions
+Pull requests are welcome. For major changes, please open an issue first to discuss the changes you would like to make.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
+
 ## Sources
 1. README:
 - Make a README (https://www.makeareadme.com/)
 - Markdown Layout Instructions (https://commonmark.org/help/)
 2. License:
-- https://choosealicense.com/licenses/mit/
-
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss the changes you would like to make.
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
+- Choose a License (https://choosealicense.com/licenses/mit/)
