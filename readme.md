@@ -1,5 +1,6 @@
 ## Weather Information with Python
-[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 - Project language: Python
 - Group Project: Group ID 2248
 
@@ -44,3 +45,5 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 - Markdown Layout Instructions (https://commonmark.org/help/)
 2. License:
 - Choose a License (https://choosealicense.com/licenses/mit/)
+3. Badges:
+- Shields: https://shields.io/
