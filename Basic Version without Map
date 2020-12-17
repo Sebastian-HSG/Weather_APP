@@ -222,8 +222,7 @@ while True:
     options_window.withdraw()
     task = simpledialog.askstring(title="Weather Information", prompt="What do you want to do?\n\n"
                                                                       "Get Current Weather Information: 1\n"
-                                                                      "Get Weather Forecast (Next Hour): 2\n"
-                                                                      "Quit Program: 3")
+                                                                      "Get Weather Forecast (Next Hour): 2")
 
     if task == '1':
         # Ask the user for input (location of interest)
@@ -233,8 +232,22 @@ while True:
                                        prompt="For which location do you want the current weather?",
                                        initialvalue="City, Country")
 
+        # Set Default Value to St. Gallen
+        if place == "City, Country":
+            place = "St. Gallen, Switzerland"
+        # go back to main menu if user clicks cancel button
+        elif place == None:
+            continue
+        else:
+            None
+
         geolocator = Nominatim(user_agent="Weather_APP")
         location = geolocator.geocode(place)
+
+        if location == None:
+            answer = tk.messagebox.showerror(title=f"Error", message="Next time please enter a valid location.")
+            continue
+
         lat = location.latitude
         lon = location.longitude
 
@@ -285,8 +298,23 @@ while True:
         place = simpledialog.askstring(title="Get Weather Forecast (Next Hour)",
                                        prompt="For which location do you want the weather forecast (next hour)?",
                                        initialvalue="City, Country")
+
+        # Set Default Value to St. Gallen
+        if place == "City, Country":
+            place = "St. Gallen, Switzerland"
+        # go back to main menu if user clicks cancel button
+        elif place == None:
+            continue
+        else:
+            None
+
         geolocator = Nominatim(user_agent="Weather_APP")
         location = geolocator.geocode(place)
+
+        if location == None:
+            answer = tk.messagebox.showerror(title=f"Error", message="Next time please enter a valid location.")
+            continue
+
         lat = location.latitude
         lon = location.longitude
         # Call respective function and save the outcome under the variables
@@ -327,10 +355,6 @@ while True:
                                                     f"Wind: {hourly_wind_speed}m/s {converted_hourly_wind_direction}({converted_hourly_wind_direction_arrow})\n "
                                                     f"Atmospheric Pressure: {hourly_pressure}hPa")
 
-    # If user wants to exit the program:
-    if task == '3':
-        exit("The program has ended.")
-
     # Check for invalid input
-    if task != '1' and task != '2' and task != '3':
+    if task != '1' and task != '2':
         answer = tk.messagebox.showerror(title=f"Error", message="Please choose a valid option.")
