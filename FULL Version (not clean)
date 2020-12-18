@@ -34,17 +34,20 @@ The following API key is needed:
 
 # ______________________________________________________________________________________________________________________
 # 1. Preparation
-
 # Import libraries
 from tkinter import simpledialog
-
-import requests  # Requests is needed for http(s) requests
-import json  # json is needed to handle the received data from API
-import tkinter as tk  # Tkinter is needed to for the GUI
-
-from geopy.geocoders import Nominatim  # geopy is needed to convert a location (string) into coordinates
-import matplotlib.pyplot as plt  # Matplotlib is needed to create a weather map
+# Requests is needed for http(s) requests
+import requests
+# json is needed to handle the received data from API
+import json
+# Tkinter is needed to for the GUI
+import tkinter as tk
+# geopy is needed to convert a location (string) into coordinates
+from geopy.geocoders import Nominatim
+# Matplotlib is needed to create a weather map and the plot for the temperature forecast
 import matplotlib.image as mpimg
+import matplotlib.pyplot as plt
+# Pandas is needed to create the plot for the temperature forecast
 import pandas as pd
 
 # ______________________________________________________________________________________________________________________
