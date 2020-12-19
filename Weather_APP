@@ -266,7 +266,7 @@ while True:
     options_window = tk.Tk()
     options_window.withdraw()
     task = simpledialog.askstring(title="Weather Information", prompt="What do you want to do?\n\nGet Current Weather "
-                                                                      "Information: 1\nGet World Weather Map: 2\n"
+                                                                      "Information: 1\nGet World Temperature Map: 2\n"
                                                                       "Get Weather Forecast (Next Hour): 3\n"
                                                                       "Get Temperature Forecast (Next 10h): 4")
 
