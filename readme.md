@@ -37,7 +37,6 @@ The current version of the program, weatherinformation_v1.0, offers the followin
 3. Get the weather forecast (next hour) for any city in the world ("Get Weather Forecast (Next Hour)")
 4. Get the temperature forecast (next 10 hours) for any city in the world ("Get Temperature Forecast (Next 10h)")
 
-
 ## Contributions
 Pull requests are welcome. For major changes, please open an issue first to discuss the changes you would like to make.
 
