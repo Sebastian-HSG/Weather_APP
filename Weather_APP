@@ -248,11 +248,14 @@ def func4(lat, lon):
     h_forecast = pd.DataFrame(lst, index=["Temperature"])
     row1 = h_forecast.iloc[0]
     ind = h_forecast.transpose().index
-    plt.bar(ind, row1, width=0.5, align='center', label= "Time", color='b')
+    plt.plot(ind, row1,'-o', label= "Time")
+    for i, txt in enumerate(row1):
+        plt.annotate(txt, (ind[i], row1[i]))
     plt.xlabel("Time in T+ hours (T=0 is now)")
     plt.ylabel("Temperature °C")
     plt.title(f"Temperature Forecast for {place}\n for the next {counter} hours")
     plt.show()
+
 
 
 # ______________________________________________________________________________________________________________________
