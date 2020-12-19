@@ -37,6 +37,11 @@ The current version of the program, weatherinformation_v1.0, offers the followin
 3. Get the weather forecast (next hour) for any city in the world ("Get Weather Forecast (Next Hour)")
 4. Get the temperature forecast (next 10 hours) for any city in the world ("Get Temperature Forecast (Next 10h)")
 
+## Screenshots
+Click on the thumbnail to open the full size images: <!-- If you are reading the raw README text, please use the urls below to view the screenshots. -->
+
+<img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%201%20-%20main%20menu.png" width="18%"> <img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%202%20-%20output%20current%20weather.png" width="18%"> <img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%203%20-%20output%20world%20temperature%20map.png" width="18%"> <img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%204%20-%20output%20weather%20forecast%20(1h).png" width="18%"> <img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%205%20-%20output%20weather%20forecast%20(next%2010h).png" width="18%">
+
 ## Contributions
 Pull requests are welcome. For major changes, please open an issue first to discuss the changes you would like to make.
 
@@ -51,8 +56,3 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 - Choose a License (https://choosealicense.com/licenses/mit/)
 3. Badges:
 - Shields: https://shields.io/
-
-## Screenshots
-Click on the thumbnail to open the full size images: <!-- If you are reading the raw README text, please use the urls below to view the screenshots. -->
-
-<img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%201%20-%20main%20menu.png" width="18%"> <img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%202%20-%20output%20current%20weather.png" width="18%"> <img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%203%20-%20output%20world%20temperature%20map.png" width="18%"> <img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%204%20-%20output%20weather%20forecast%20(1h).png" width="18%"> <img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%205%20-%20output%20weather%20forecast%20(next%2010h).png" width="18%">
