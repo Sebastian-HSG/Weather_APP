@@ -53,8 +53,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 - Shields: https://shields.io/
 
 ## Screenshots
-<img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%201%20-%20main%20menu.png" width="40%">
-<img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%202%20-%20output%20current%20weather.png" width="40%">
-<img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%203%20-%20output%20world%20temperature%20map.png" width="40%">
-<img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%204%20-%20output%20weather%20forecast%20(1h).png" width="40%">
-<img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%205%20-%20output%20weather%20forecast%20(next%2010h).png" width="40%">
+<img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%201%20-%20main%20menu.png" width="40%"> <img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%202%20-%20output%20current%20weather.png" width="40%"> <img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%203%20-%20output%20world%20temperature%20map.png" width="40%"> <img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%204%20-%20output%20weather%20forecast%20(1h).png" width="40%"> <img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/screenshots/screenshot%205%20-%20output%20weather%20forecast%20(next%2010h).png" width="40%">
