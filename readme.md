@@ -33,7 +33,7 @@ Tip: You can use an IDE such as [PyCharm](https://www.jetbrains.com/pycharm/) to
 ## Program Description & Features
 The current version of the program, weatherinformation_v1.0, offers the following features:
 1. Get the current weather information for any city in the world ("Get Current Weather Information")
-2. Get the current weather map of the world ("Show Weather Map")
+2. Get the current weather map of the world ("Get World Temperature Map")
 3. Get the weather forecast (next hour) for any city in the world ("Get Weather Forecast (Next Hour)")
 4. Get the temperature forecast (next 10 hours) for any city in the world ("Get Temperature Forecast (Next 10h)")
 
