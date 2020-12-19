@@ -43,7 +43,6 @@ import pandas as pd
 # ______________________________________________________________________________________________________________________
 # 3. Define functions
 
-
 # Function 1: Get Current Weather Information
 def func1(lat, lon):
     url = f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={api_key}&units=metric"
