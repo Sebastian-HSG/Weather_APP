@@ -1,22 +1,4 @@
 '''
-General overview of the code:
-
-1. define function1
-2. define function2
-3. define function3
-
-while True:
-    1. Ask user which tool he wants
-    2. for each tool:
-        1. Ask the User the Location
-        2. convert location into coordinates
-        3. put the coordinates into the corresponding function
-        4. take the functions result and display it accoring to some rules
-    3. if user wants to end program -> EXIT
-
-'''
-
-'''
 0. Prerequisites
 
 The following packages are required and need to be installed before continuing:
@@ -65,7 +47,6 @@ def func1(lat, lon):
     url = f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={api_key}&units=metric"
     response1 = requests.get(url)
     data = json.loads(response1.text)
-    #todo: print(json.dumps(data, indent=2))
 
     # Show selected weather data from pulled data
     # General weather data (for all requested locations):
@@ -79,19 +60,20 @@ def func1(lat, lon):
     # Conditional weather data (depending on the current primary weather conditions for the requested locations)
     rain_or_snow_volume = data["current"]["weather"][0]["main"]
 
-    if rain_or_snow_volume == "Snow":  # If the current primary weather condition for the requested location is snow,
-        # get the snow volume
+    # If the current primary weather condition for the requested location is snow, get the snow volume.
+    if rain_or_snow_volume == "Snow":
         rain_or_snow_volume = data["current"]["snow"]["1h"]
         rain_or_snow_volume = f"\u2744 {rain_or_snow_volume} mm/h"
         rain_or_snow_volume_define = "snow"
 
-    elif rain_or_snow_volume == "Rain":  # If the current primary condition for the requested location is rain,
-        # get the rain volume
+    # If the current primary condition for the requested location is rain,get the rain volume.
+    elif rain_or_snow_volume == "Rain":
         rain_or_snow_volume = data["current"]["rain"]["1h"]
         rain_or_snow_volume = f"\u2602 {rain_or_snow_volume} mm/h"
         rain_or_snow_volume_define = "rain"
 
-    else:  # if the current primary weather condition is something other than rain or snow.
+    # if the current primary weather condition is something other than rain or snow.
+    else:
         rain_or_snow_volume = None
         rain_or_snow_volume_define = None
 
@@ -147,22 +129,18 @@ def func1(lat, lon):
 def func2():
     # Layer name -> you need to use the code names from https://openweathermap.org/api/weather-map-2#layers
     op = "TA2"
-    # Number of zoom level
-    z = "1"
-    # Number of x tile coordinate (should be either 1 or 0)
+    # Number of zoom level (can be adjusted)
+    z = "0"
+    # Number of x tile coordinate (can be adjusted)
     x = "0"
-    # Number of y tile coordinate (should be either 1 or 0)
+    # Number of y tile coordinate (can be adjusted)
     y = "0"
-    # Layer name for the map1.0
-    layer = "temp_new"
-    # I had to change to the weather map 1.0 because 2.0 is not included in the free subscription
+
     mapurl = f"http://maps.openweathermap.org/maps/2.0/weather/{op}/{z}/{x}/{y}?appid={api_key}&opacity=0.6&fill_bound=false"
-    # mapurl = "https://tile.openweathermap.org/map/precipitation_new/1/1/0.png?appid=9c0ce6ab97bfa4ad656dafe8389e5c31"
     response2 = requests.get(mapurl)
-    # the next 3 lines form the color window. We first need to unpack the png data into an array and then plot the array and lastly show the plot
+    # the next 3 lines form the color window.
     img = mpimg.imread(f'{mapurl}')
-    # print(img)
-    imgplot = plt.imshow(img)
+    plt.imshow(img)
     plt.show()
     return response2
 
@@ -172,9 +150,9 @@ def func3(lat, lon):
 
     response3 = requests.get(url)
     data = json.loads(response3.text)
-    # print(json.dumps(data, indent=2))  ### todo: THIS NEEDS TO BE REMOVED ###
 
     # Show selection of weather data from all pulled data
+
     # General weather data (for all requested locations):
     hourly_temp = data["hourly"][1]["temp"]
     hourly_feels_like_temp = data["hourly"][1]["feels_like"]
@@ -185,17 +163,21 @@ def func3(lat, lon):
 
     # Conditional weather data (depending on the hourly primary weather conditions for the requested locations)
     hourly_rain_or_snow_volume = data["hourly"][1]["weather"][0]["main"]
-    if hourly_rain_or_snow_volume == "Snow":  # If the current primary weather condition for the requested location
-        # is snow, get the snow volume
+
+    # If the current primary weather condition for the requested location is snow, get the snow volume.
+    if hourly_rain_or_snow_volume == "Snow":
         hourly_rain_or_snow_volume = data["hourly"][1]["snow"]["1h"]
         hourly_rain_or_snow_volume = f"\u2744 {hourly_rain_or_snow_volume} mm/h"
         hourly_rain_or_snow_volume_define = "snow"
-    elif hourly_rain_or_snow_volume == "Rain":  # If the current primary condition for the requested location is rain,
-        # get the rain volume
+
+    # If the current primary condition for the requested location is rain, get the rain volume.
+    elif hourly_rain_or_snow_volume == "Rain":
         hourly_rain_or_snow_volume = data["hourly"][1]["rain"]["1h"]
         hourly_rain_or_snow_volume = f"\u2602 {hourly_rain_or_snow_volume} mm/h"
         hourly_rain_or_snow_volume_define = "rain"
-    else:  # if the current primary weather condition is something other than rain or snow.
+
+    # if the current primary weather condition is something other than rain or snow.
+    else:
         hourly_rain_or_snow_volume = None
         hourly_rain_or_snow_volume_define = None
 
@@ -247,23 +229,26 @@ def func3(lat, lon):
 
 # Function 4: Temperature Forecast for the next 10 Hours
 def func4(lat, lon):
+    # get the data from the API
     url = f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={api_key}&units=metric"
 
     response3 = requests.get(url)
     data = json.loads(response3.text)
 
+    #abstract the hourly temperature data out of the response
     counter = 0
-    listi = {}
+    lst = {}
     for x in data["hourly"]:
         while counter <= 9:
             counter += 1
             e = data["hourly"][counter]["temp"]
-            listi[f'T+{counter}']= (e)
+            lst[f'T+{counter}']= (e)
 
-    l = pd.DataFrame(listi, index=["Temperature"])
+    #create a dataframe and a respective plot
+    h_forecast = pd.DataFrame(lst, index=["Temperature"])
 
-    row1 = l.iloc[0]
-    ind = l.transpose().index
+    row1 = h_forecast.iloc[0]
+    ind = h_forecast.transpose().index
     plt.bar(ind, row1, width=0.5, align='center', label= "Time", color='g')
     plt.xlabel("Time in T+ hours")
     plt.ylabel("Temperature")
@@ -291,16 +276,15 @@ while True:
                                        prompt="For which location do you want the current weather?",
                                        initialvalue="City, Country")
 
-        # Set Default Value to St. Gallen
+        # set default value to St. Gallen & go back to main menu if user clicks cancel button
         if place == "City, Country":
            place = "St. Gallen, Switzerland"
-        # go back to main menu if user clicks cancel button
         elif place == None:
             continue
         else:
             None
 
-        # Convert the Location into Latitude and Longitude
+        # Convert the requested location into latitude and longitude
         geolocator = Nominatim(user_agent="Weather_APP")
         location = geolocator.geocode(place)
         if location == None:
@@ -315,7 +299,8 @@ while True:
         converted_current_wind_direction_arrow  = func1(lat, lon)
 
         # The relevant output is printed based on the primary weather condition for the user's requested location:
-        # If the current primary weather condition is rain
+
+        # If the current primary weather condition is rain:
         if rain_or_snow_volume_define == "rain":
             answer = tk.messagebox.showinfo(title=f"Current Weather Information {place}",
                                             message=f"{place} \n"
@@ -326,7 +311,7 @@ while True:
                                                     f"Wind: {current_wind_speed}m/s {converted_current_wind_direction}({converted_current_wind_direction_arrow})\n"
                                                     f"Atmospheric Pressure: {current_pressure}hPa")
 
-        # If the current primary weather condition is snow
+        # If the current primary weather condition is snow:
         elif rain_or_snow_volume_define == "snow":
             answer = tk.messagebox.showinfo(title=f"Current Weather Information {place}",
                                             message=f"{place} \n"
@@ -337,7 +322,7 @@ while True:
                                                     f"Wind: {current_wind_speed}m/s {converted_current_wind_direction}({converted_current_wind_direction_arrow})\n"
                                                     f"Atmospheric Pressure: {current_pressure}hPa")
 
-        # If the current primary weather condition is something else than rain or snow
+        # If the current primary weather condition is something else than rain or snow:
         else:
             answer = tk.messagebox.showinfo(title=f"Current Weather Information {place}",
                                             message=f"{place} \n"
@@ -348,8 +333,6 @@ while True:
                                                     f"Atmospheric Pressure: {current_pressure}hPa")
 
     if task == '2':
-        # Placeholder for another function
-        print("Work in progress")
         map = func2()
         print(map)
 
@@ -361,7 +344,7 @@ while True:
                                        prompt="For which location do you want the weather forecast (next hour)?",
                                        initialvalue="City, Country")
 
-        # Set Default Value to St. Gallen/go back to main menu if user clicks cancel button.
+        # Set default value to St. Gallen & go back to main menu if user clicks cancel button.
         if place == "City, Country":
             place = "St. Gallen, Switzerland"
         elif place == None:
@@ -384,7 +367,8 @@ while True:
         converted_hourly_wind_direction, converted_hourly_wind_direction_arrow = func3(lat, lon)
 
         # The relevant output is printed based on the primary weather condition for the user's requested location:
-        # If the current primary weather condition is rain
+
+        # If the current primary weather condition is rain:
         if hourly_rain_or_snow_volume_define == "rain":
             answer = tk.messagebox.showinfo(title=f"Weather Forecast (Next Hour) {place}",
                                             message=f"Weather Forecast (Next Hour){place} \n"
@@ -395,7 +379,7 @@ while True:
                                                     f"Wind: {hourly_wind_speed}m/s {converted_hourly_wind_direction}({converted_hourly_wind_direction_arrow})\n "
                                                     f"Atmospheric Pressure: {hourly_pressure}hPa")
 
-        # If the current primary weather condition is snow
+        # If the current primary weather condition is snow:
         elif hourly_rain_or_snow_volume_define == "snow":
             answer = tk.messagebox.showinfo(title=f"Weather Forecast (Next Hour) {place}",
                                             message=f"Weather Forecast (Next Hour){place} \n"
@@ -406,7 +390,7 @@ while True:
                                                     f"Wind: {hourly_wind_speed}m/s {converted_hourly_wind_direction}({converted_hourly_wind_direction_arrow})\n "
                                                     f"Atmospheric Pressure: {hourly_pressure}hPa")
 
-        # If the current primary weather condition is something else than rain or snow
+        # If the current primary weather condition is something else than rain or snow:
         else:
             answer = tk.messagebox.showinfo(title=f"Weather Forecast (Next Hour) {place}",
                                             message=f"Weather Forecast (Next Hour) {place} \n"
@@ -423,16 +407,15 @@ while True:
                                        prompt="For which location do you want the Forecast?",
                                        initialvalue="City, Country")
 
-        # Set Default Value to St. Gallen
+        # Set Default Value to St. Gallen & go back to main menu if user clicks cancel button
         if place == "City, Country":
             place = "St. Gallen, Switzerland"
-        # go back to main menu if user clicks cancel button
         elif place == None:
             continue
         else:
             None
 
-        # Convert the Location into Latitude and Longitude
+        # Convert the requested location into latitude and longitude
         geolocator = Nominatim(user_agent="Weather_APP")
         location = geolocator.geocode(place)
         if location == None:
@@ -451,3 +434,4 @@ while True:
     # Check for invalid input
     if task != '1' and task != '2' and task != '3' and task != '4':
         answer = tk.messagebox.showerror(title=f"Error", message="Please choose a valid option.")
+
