@@ -27,8 +27,7 @@
 ## Instructions
 1. Start weatherinformation_vX.X.py
 2. Add your own OpenWeather API key.
-3. Run the program.
-Tip: You can use an IDE such as [PyCharm](https://www.jetbrains.com/pycharm/) to run this program.
+3. Run the program. (*Tip: You can use an IDE such as [PyCharm](https://www.jetbrains.com/pycharm/) to run this program.*)
 
 ## Program Description & Features
 The current version of the program, weatherinformation_v1.0, offers the following features:
