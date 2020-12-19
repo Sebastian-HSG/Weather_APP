@@ -238,7 +238,7 @@ def func4(lat, lon):
     #abstract the hourly temperature data out of the response
     counter = 0
     lst = {}
-    for x in data["hourly"]:
+    for _ in data["hourly"]:
         while counter <= 9:
             counter += 1
             e = data["hourly"][counter]["temp"]
@@ -246,13 +246,12 @@ def func4(lat, lon):
 
     #create a dataframe and a respective plot
     h_forecast = pd.DataFrame(lst, index=["Temperature"])
-
     row1 = h_forecast.iloc[0]
     ind = h_forecast.transpose().index
-    plt.bar(ind, row1, width=0.5, align='center', label= "Time", color='g')
-    plt.xlabel("Time in T+ hours")
-    plt.ylabel("Temperature")
-    plt.title(f"Temperature Forecast for the next {counter} hours")
+    plt.bar(ind, row1, width=0.5, align='center', label= "Time", color='b')
+    plt.xlabel("Time in T+ hours (T=0 is now)")
+    plt.ylabel("Temperature °C")
+    plt.title(f"Temperature Forecast for {place}\n for the next {counter} hours")
     plt.show()
 
 
