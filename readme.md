@@ -53,4 +53,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 - Shields: https://shields.io/
 
 ## Screenshots
-![Image](https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/Main%20menu.png)
+<img src="https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/Main%20menu.png" width="40%">
