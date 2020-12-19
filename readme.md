@@ -51,3 +51,6 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 - Choose a License (https://choosealicense.com/licenses/mit/)
 3. Badges:
 - Shields: https://shields.io/
+
+## Screenshots
+![Image](https://github.com/Sebastian-HSG/Groupproject_Autumn20/blob/main/Main%20menu.png)
