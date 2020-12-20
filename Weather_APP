@@ -17,7 +17,8 @@ The following API key is needed:
 # ______________________________________________________________________________________________________________________
 # 1. Setup API to fetch data
 
-api_key = "26995977f270da2b39c5d59d40e27b2e"  # Insert your OpenWeather API key here
+# Insert your OpenWeather API key here
+api_key = ""
 
 
 # ______________________________________________________________________________________________________________________
