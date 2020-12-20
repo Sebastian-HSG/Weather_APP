@@ -5,7 +5,7 @@
 - Group Project: Group ID 2248
 
 ## About
-- This is a group project of three students (Raïs Lall Mohamed, Tim Niedermann, and Sebastian Stein) for the course "Skills: Programming - Introduction Level" (course number 3,793,1.00) and the course "Skills: Programming with Advanced Computer Languages" (course number 7,789,1.00) at the University of St.Gallen (HSG).
+- This is a group project of three students (Tim Niedermann, Sebastian Stein, & Raïs Lall Mohamed) for the course "Skills: Programming - Introduction Level" (course number 3,793,1.00) and the course "Skills: Programming with Advanced Computer Languages" (course number 7,789,1.00) at the University of St.Gallen (HSG).
 - The goal of this project was to create a program in Python that displays weather information (e.g., the current weather and the weather forecast) based on a user's input (e.g., a location of interest).
 
 ## Pre-requisites
