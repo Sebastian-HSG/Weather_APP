@@ -10,7 +10,9 @@ The following packages are required and need to be installed before continuing:
 - pandas (built-in in Python)
 
 The following API key is needed:
-- OpenWeather (for the current version of this program, the free plan suffices; https://openweathermap.org/api)
+- OpenWeather (https://openweathermap.org/api)
+- Please note, for function 1, 3, and 4 (see below), the free OpenWeather plan suffices.
+- For function 2 (see below), a paid plan is required (https://openweathermap.org/price).
 '''
 
 # ______________________________________________________________________________________________________________________
