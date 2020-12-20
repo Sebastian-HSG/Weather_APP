@@ -147,7 +147,7 @@ def func2():
     plt.show()
     return response2
 
-# Funtion 3: Weather Forecast (hourly)
+# Funtion 3: Weather Forecast (1 hour)
 def func3(lat, lon):
     url = f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={api_key}&units=metric"
 
