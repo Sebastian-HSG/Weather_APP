@@ -127,7 +127,7 @@ def func1(lat, lon):
            converted_current_wind_direction, converted_current_wind_direction_arrow
 
 
-# Function 2: World Weather Map
+# Function 2: World Temperature Map
 # Ignore function 2 for now
 def func2():
     # Layer name -> you need to use the code names from https://openweathermap.org/api/weather-map-2#layers
