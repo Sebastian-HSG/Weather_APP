@@ -379,13 +379,13 @@ while True:
                                                     f"Feels Like Temperature: {hourly_feels_like_temp}°C.\n"
                                                     f"Weather Condition: {hourly_weather_description}.\n"
                                                     f"{hourly_rain_or_snow_volume}\n"
-                                                    f"Wind: {hourly_wind_speed}m/s {converted_hourly_wind_direction}({converted_hourly_wind_direction_arrow})\n "
+                                                    f"Wind: {hourly_wind_speed}m/s {converted_hourly_wind_direction}({converted_hourly_wind_direction_arrow})\n"
                                                     f"Atmospheric Pressure: {hourly_pressure}hPa")
 
         # If the current primary weather condition is snow:
         elif hourly_rain_or_snow_volume_define == "snow":
             answer = tk.messagebox.showinfo(title=f"Weather Forecast (Next Hour) {place}",
-                                            message=f"Weather Forecast (Next Hour){place} \n"
+                                            message=f"Weather Forecast (Next Hour){place}\n"
                                                     f"Temperature: {hourly_temp}°C\n"
                                                     f"Feels Like Temperature: {hourly_feels_like_temp}°C.\n"
                                                     f"Weather Condition: {hourly_weather_description}.\n"
@@ -396,11 +396,11 @@ while True:
         # If the current primary weather condition is something else than rain or snow:
         else:
             answer = tk.messagebox.showinfo(title=f"Weather Forecast (Next Hour) {place}",
-                                            message=f"Weather Forecast (Next Hour) {place} \n"
+                                            message=f"Weather Forecast (Next Hour) {place}\n"
                                                     f"Temperature: {hourly_temp}°C\n"
                                                     f"Feels Like Temperature: {hourly_feels_like_temp}°C.\n"
                                                     f"Weather Condition: {hourly_weather_description}.\n"
-                                                    f"Wind: {hourly_wind_speed}m/s {converted_hourly_wind_direction}({converted_hourly_wind_direction_arrow})\n "
+                                                    f"Wind: {hourly_wind_speed}m/s {converted_hourly_wind_direction}({converted_hourly_wind_direction_arrow})\n"
                                                     f"Atmospheric Pressure: {hourly_pressure}hPa")
     if task == "4":
         # Ask the user for input (location of interest)
