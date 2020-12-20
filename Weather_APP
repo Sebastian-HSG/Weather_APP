@@ -11,7 +11,6 @@ The following packages are required and need to be installed before continuing:
 
 The following API key is needed:
 - OpenWeather (for the current version of this program, the free plan suffices; https://openweathermap.org/api)
-
 '''
 
 # ______________________________________________________________________________________________________________________
