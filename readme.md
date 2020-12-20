@@ -25,7 +25,7 @@
 - Please note, for feature 1, 3, and 4 (see below), the free OpenWeather plan suffices. However, for feature 2 (see below), "advanced weather maps" is required, which is part of the paid developer, professional, and enterprise plan (https://openweathermap.org/price).
 
 ## Instructions
-1. Start weatherinformation_vX.X.py
+1. Start Weather_APP.py
 2. Add your own OpenWeather API key.
 3. Run the program. (*Tip: You can use an IDE such as [PyCharm](https://www.jetbrains.com/pycharm/) to run this program.*)
 
