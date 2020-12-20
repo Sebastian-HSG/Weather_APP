@@ -7,7 +7,7 @@ The following packages are required and need to be installed before continuing:
 - matplotlib (https://matplotlib.org/)
 - json (built-in in Python)
 - tkinter (built-in in Python)
-- pandas (built-in in Python)
+- pandas (https://pandas.pydata.org/)
 
 The following API key is needed:
 - OpenWeather (https://openweathermap.org/api)
